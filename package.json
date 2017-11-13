@@ -22,7 +22,8 @@
     "peer",
     "p2p",
     "peer-to-peer",
-    "iot"
+    "iot",
+    "serverless"
   ],
   "main": "index.js"
 }

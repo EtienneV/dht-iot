@@ -56,8 +56,6 @@ function dht_iot(opts){
 		console.log("PublicKey : " + opts.keypair.publicKey.toString('hex'))
 		console.log("SecretKey : " + opts.keypair.secretKey.toString('hex'))
 		console.log()
-
-		
   	}
 
   	var self = this
@@ -103,17 +101,23 @@ function dht_iot(opts){
 
 		  	var infohash = infohash_from_key(self.keypair.publicKey)
 
-		  	dht.get(infohash, function (err, res) {
+		  	dht.get(infohash, function (err, res, nodes) {
 		  		dht.destroy()
 
 		  		var value = JSON.parse(res.v.toString('ascii'))
 
-		  		self.emit('get_response', res)
+		  		self.emit('get_response', res, nodes)
 
 				resolve({
 					timestamp: value.t,
-					value: value.v
+					value: value.v, 
+					nodes: nodes
 				})
+			})
+
+			dht.on('get_peer', function (message, node) { 
+				//console.log("get peer")
+				self.emit('get_peer', message, node)
 			})
 		});
 	}
@@ -133,6 +137,7 @@ function dht_iot(opts){
 					last_timestamp = val.timestamp
 
 					self.emit('new_value', infohash, val)
+					self.emit('get_nodes', val.nodes)
 				}
 			})
 
