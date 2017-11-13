@@ -1,0 +1,27 @@
+{
+  "name": "dht-iot",
+  "description": "The BitTorrent DHT for IoT communication",
+  "version": "0.0.1",
+  "author": {
+    "name": "Etienne Villedieu",
+    "email": "etienne.villedieu@econocom.com",
+    "url": "http://etiennevilledieu.fr"
+  },
+  "dependencies": {
+    "bittorrent-dht": "^7.7.0",
+    "ed25519-supercop": "^1.0.2",
+    "cron": "^1.3.0"
+  },
+  "keywords": [
+    "torrent",
+    "bittorrent",
+    "dht",
+    "distributed hash table",
+    "protocol",
+    "peer",
+    "p2p",
+    "peer-to-peer",
+    "iot"
+  ],
+  "main": "index.js"
+}
