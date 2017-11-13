@@ -3,6 +3,12 @@ Using the BitTorrent DHT to store IoT data
 
 I am using my forked version of the bitTorrent-dht module : https://github.com/EtienneV/bittorrent-dht
 
+## install
+
+```
+npm install dht-iot
+```
+
 ## Examples
 
 ### Put data
