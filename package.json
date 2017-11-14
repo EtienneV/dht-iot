@@ -1,7 +1,7 @@
 {
   "name": "dht-iot",
   "description": "The BitTorrent DHT for IoT communication",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": {
     "name": "Etienne Villedieu",
     "email": "etienne.villedieu@econocom.com",

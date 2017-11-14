@@ -16,7 +16,7 @@ dht_iot.on('get_peer', function (message, node) {
 		//console.log(node)
 		console.log(node.address)
 		if(message.r.id) console.log("NODE ID : "+message.r.id.toString('hex'))
-		console.log("Distance : "+distance(message.r.id.toString('hex'), infoHash))
+		console.log("Distance : "+distance(message.r.id.toString('hex'), dht_iot.get_infohash()))
 		if(message.v){
 			var client_id = message.v.toString('hex')
 

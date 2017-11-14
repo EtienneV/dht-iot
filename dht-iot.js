@@ -1,4 +1,7 @@
 /*
+(C) Etienne Villedieu
+Phd Student at Econocom and INSA Lyon
+email : mail@etiennevilledieu.fr
 
 Keypair generation
 -> Storing in a file / Just show it
@@ -116,7 +119,6 @@ function dht_iot(opts){
 			})
 
 			dht.on('get_peer', function (message, node) { 
-				//console.log("get peer")
 				self.emit('get_peer', message, node)
 			})
 		});
@@ -154,6 +156,10 @@ function dht_iot(opts){
 		  publicKey: kp.publicKey.toString('hex'),
 		  secretKey: kp.secretKey.toString('hex')
 		}))
+	}
+
+	dht_iot.prototype.get_infohash = function() {
+		return infohash_from_key(self.keypair.publicKey)
 	}
 
 	function sha1 (buf) {
