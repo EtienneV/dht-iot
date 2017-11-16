@@ -111,6 +111,8 @@ function dht_iot(opts){
 
 		  		self.emit('get_response', res, nodes)
 
+		  		//console.log(nodes)
+
 				resolve({
 					timestamp: value.t,
 					value: value.v, 
@@ -137,6 +139,8 @@ function dht_iot(opts){
 			self.get().then(function(val) {
 				if(val.timestamp > last_timestamp) {
 					last_timestamp = val.timestamp
+
+					//console.log(val.nodes)
 
 					self.emit('new_value', infohash, val)
 					self.emit('get_nodes', val.nodes)
