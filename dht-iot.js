@@ -28,7 +28,7 @@ Get notified for a new response after a lookup
 */
 module.exports = dht_iot
 
-var DHT = require('bittorrent-dht')
+var DHT = require('bittorrent-dht-infonodes')
 var ed = require('ed25519-supercop')
 var crypto = require('crypto')
 var inherits = require('inherits')
@@ -98,6 +98,7 @@ function dht_iot(opts){
 
 	dht_iot.prototype.get = function() {
 		// TO DO : use the salt (channel)
+		// TO DO : paramètre hash optionnel
 
 		return new Promise((resolve, reject) => {
 		  	var dht = new DHT({ verify: ed.verify})

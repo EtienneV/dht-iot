@@ -9,15 +9,55 @@ I am using my forked version of the bitTorrent-dht module : https://github.com/E
 npm install dht-iot
 ```
 
-## Examples
-
-### Put data
+## Initialisation
 
 ```javascript
 var DHT_IOT = require('dht-iot')
 
-var keypair = {publicKey:Buffer.from("6ef441733b1510cc5c93b7201e256b1d9605825e4ea0caca8e202193be090da4", 'hex'),
-			secretKey:Buffer.from("6809e0b94f41b1d72cbe29e433e488e1682c703f0ea6a2b5e8bb8a2e74bbf16811759cd5477a8f10b4d73e1f76aaaec81ea201d60ad0358e749c4d3426f5901a", 'hex')}
+var keypair = {publicKey:Buffer.from("xxxxxxxxxxxxxxxxxxxx", 'hex'),
+			secretKey:Buffer.from("xxxxxxxxxxxxxxxxxxxxxxx", 'hex')}
+var dht_iot = new DHT_IOT({keypair: keypair})
+```
+
+Initiate a dht-iot instance with a specified keypair.
+
+```javascript
+var DHT_IOT = require('dht-iot')
+
+var dht_iot = new DHT_IOT()
+```
+
+Initiate a dht-iot instance with a random keypair.
+
+## Keypair generation
+
+```javascript
+dht_iot.new_keypair()
+```
+
+It will display a new random keypair.
+
+
+## Put data
+
+Send data over the DHT at the hash corresponding to the specified keypair.
+
+```javascript
+dht_iot.put(val).then(function(hash) {})
+```
+IN
+val : Value to publish on the DHT
+
+OUT
+hash : the hash corresponding to the value published
+
+### Example
+
+```javascript
+var DHT_IOT = require('dht-iot')
+
+var keypair = {publicKey:Buffer.from("xxxxxxxxxxxxxxxxxxxxx", 'hex'),
+			secretKey:Buffer.from("xxxxxxxxxxxxxxxxxxxxxxxx", 'hex')}
 var dht_iot = new DHT_IOT({keypair: keypair})
 
 dht_iot.put(50).then(function(hash) {
@@ -28,13 +68,25 @@ dht_iot.put(50).then(function(hash) {
 
 ```
 
-### Get data
+## Get data
+
+Get data at the hash corresponding to the specified keypair.
+
+```javascript
+dht_iot.get().then(function(val) {})
+```
+
+OUT
+val.v : the value
+val.t : the date of the value (UNIX timestamp in seconds)
+
+### Example
 
 ```javascript
 var DHT_IOT = require('dht-iot')
 
-var keypair = {publicKey:Buffer.from("6ef441733b1510cc5c93b7201e256b1d9605825e4ea0caca8e202193be090da4", 'hex'),
-			secretKey:Buffer.from("6809e0b94f41b1d72cbe29e433e488e1682c703f0ea6a2b5e8bb8a2e74bbf16811759cd5477a8f10b4d73e1f76aaaec81ea201d60ad0358e749c4d3426f5901a", 'hex')}
+var keypair = {publicKey:Buffer.from("xxxxxxxxxxxxxxxxxxxxxxxxxx", 'hex'),
+			secretKey:Buffer.from("xxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 'hex')}
 var dht_iot = new DHT_IOT({keypair: keypair})
 
 dht_iot.get().then(function(val) {
@@ -45,13 +97,23 @@ dht_iot.get().then(function(val) {
 
 ```
 
-### Get notified for new data
+## Get notified for new data
+
+Get notified at every new message. The checking resolution is about 3 seconds.
+
+```javascript
+dht_iot.get_notified() // Launch notification system
+```
+
+Everytime there is a new value an "new_value" event is fired
+
+### Example
 
 ```javascript
 var DHT_IOT = require('dht-iot')
 
-var keypair = {publicKey:Buffer.from("6ef441733b1510cc5c93b7201e256b1d9605825e4ea0caca8e202193be090da4", 'hex'),
-			secretKey:Buffer.from("6809e0b94f41b1d72cbe29e433e488e1682c703f0ea6a2b5e8bb8a2e74bbf16811759cd5477a8f10b4d73e1f76aaaec81ea201d60ad0358e749c4d3426f5901a", 'hex')}
+var keypair = {publicKey:Buffer.from("xxxxxxxxxxxxxxxxxxxxxxxxxxxx", 'hex'),
+			secretKey:Buffer.from("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 'hex')}
 var dht_iot = new DHT_IOT({keypair: keypair})
 
 var notif = dht_iot.get_notified()
